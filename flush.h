@@ -1,16 +1,26 @@
 #ifndef flush_H
 #define flush_H
+#include <QCoreApplication>
 
-#include <QtCore/QObject>
+namespace Phonon {
+class MediaObject;
+}
 
-class flush : public QObject
+class QProcess;
+
+
+class Flush : public QObject
 {
 Q_OBJECT
 public:
-    flush();
-    virtual ~flush();
+    explicit Flush(int s);
+    virtual ~Flush();
 private slots:
-    void output();
+  
+  void exitLoop();
+
+private:
+  Phonon::MediaObject *mediaObject;
 };
 
 #endif // flush_H

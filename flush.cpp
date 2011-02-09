@@ -1,21 +1,30 @@
 #include "flush.h"
 
-#include <QTimer>
+#include <QStringList>
+#include <QProcess>
+#include <phonon/MediaObject>
+#include <phonon/MediaSource>
 #include <iostream>
-
-flush::flush()
+Flush::Flush(int s) 
 {
-    QTimer* timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), SLOT(output()) );
-    timer->start( 1000 );
+    if(s==0){
+    mediaObject = Phonon::createPlayer(Phonon::MusicCategory,Phonon::MediaSource(":flush.ogg"));
+  }else{
+    mediaObject = Phonon::createPlayer(Phonon::MusicCategory,Phonon::MediaSource(":sadtrombone.ogg"));
+  }
+  connect(mediaObject,SIGNAL(finished()),this,SLOT(exitLoop()));
+  mediaObject->play();
+}
+Flush::~Flush()
+{
+
+}
+void Flush::exitLoop()
+{
+  qApp->quit();
 }
 
-flush::~flush()
-{}
 
-void flush::output()
-{
-    std::cout << "Hello World!" << std::endl;
-}
+
 
 #include "flush.moc"
