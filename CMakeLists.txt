@@ -4,7 +4,7 @@ find_package(Qt4 COMPONENTS Phonon REQUIRED)
 include(${QT_USE_FILE})
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${QT_PHONON_INCLUDE_DIR})
 
-set(flush_SRCS flush.cpp main.cpp)
+set(flush_SRCS main.cpp)
 QT4_ADD_RESOURCES(flush_RCC resources.qrc)
 qt4_automoc(${flush_SRCS})
 add_executable(flush ${flush_SRCS} ${flush_RCC})
